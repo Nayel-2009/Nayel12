@@ -40,4 +40,48 @@
   ST.main.initAuthState(()=>{});
 </script>
 </body>
+  <script>
+  async function submitStory() {
+    const title = document.getElementById("storyTitle").value.trim();
+    const body = document.getElementById("storyBody").value.trim();
+    const user = ST.firebase.auth.currentUser;
+
+    if (!user) {
+      alert("You must be signed in to post a story.");
+      return;
+    }
+
+    if (!title || !body) {
+      alert("Please fill in both the title and story.");
+      return;
+    }
+
+    await ST.main.addStory(title, body, user.displayName || user.email);
+    document.getElementById("storyTitle").value = "";
+    document.getElementById("storyBody").value = "";
+  }
+
+  function renderStories(stories) {
+    const list = document.getElementById("storiesList");
+
+    if (stories.length === 0) {
+      list.innerHTML = "<p>No stories yet.</p>";
+      return;
+    }
+
+    list.innerHTML = stories.map(s => `
+      <div class="story-card">
+        <h3>${s.title}</h3>
+        <p>${s.body}</p>
+        <small>By ${s.authorName || "Anonymous"} — ${s.createdAt?.toDate().toLocaleString() || ""}</small>
+        <hr>
+      </div>
+    `).join("");
+  }
+
+  // 🔥 Live update from Firestore  
+  ST.main.subscribeStories(renderStories);
+</script>
+
 </html>
+
