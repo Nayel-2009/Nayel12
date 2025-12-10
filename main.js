@@ -183,5 +183,18 @@ function escapeHtml(s){ return String(s).replace(/[&<>"']/g, c=> ({'&':'&amp;','
 ///////////////////
 // expose to window
 ///////////////////
-window.ST = window.ST || {};
-window.ST.main = { renderAuthUI, initAuthState, postContactMessage, postWall, addStory, subscribeWall, subscribeStories, subscribeTimeline, addTimelineEvent, renderQuiz, seedSampleData, playSound };
+window.ST.main = {
+  renderAuthUI,
+  initAuthState,
+  postContactMessage,
+  postWall,
+  addStory,
+  subscribeWall,
+  subscribeStories,
+  subscribeTimeline,
+  addTimelineEvent,
+  renderQuiz,
+  seedSampleData
+};
+
+
