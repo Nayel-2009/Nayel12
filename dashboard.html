@@ -14,6 +14,18 @@
 
 <div class="container">
   <div class="card">
+  <h2>Share Your Story</h2>
+  <input id="storyTitle" placeholder="Story title" class="input" />
+  <textarea id="storyBody" placeholder="Write your story..." rows="5"></textarea>
+  <button class="btn-game" onclick="submitStory()">Post Story</button>
+</div>
+
+<div class="card">
+  <h2>Community Stories</h2>
+  <div id="storiesList"></div>
+</div>
+
+  <div class="card">
     <h2>Your Dashboard</h2>
     <p>Welcome! Here you will find your quiz history, your submitted stories, and your saved quotes.</p>
     <div style="margin-top:12px">
