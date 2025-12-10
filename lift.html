@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>StandUpTogether — Lift Others Up</title>
+<link rel="stylesheet" href="style.css"></head>
+<body>
+<nav>
+  <div class="brand">StandUpTogether</div>
+  <div class="links">
+    <a href="index.html">Home</a><a href="about.html">About</a><a href="timeline.html">Timeline</a><a href="lift.html">Lift Others Up</a><a href="stories.html">Stories</a><a href="positivity.html">Positivity Wall</a><a href="contact.html">Contact</a><a href="login.html">Login</a><a href="dashboard.html">Dashboard</a>
+  </div>
+  <div id="authContainer"></div>
+</nav>
+
+<div class="container">
+  <div class="card">
+    <h2>How to Lift Others Up</h2>
+    <p>Small kindnesses matter. Invite someone to play, send a quick supportive message, or stand up to toxic behaviour in a calm way.</p>
+  </div>
+
+  <div class="card">
+    <h3>Mini Quiz</h3>
+    <div id="liftQuiz"></div>
+  </div>
+</div>
+
+<script type="module" src="main.js"></script>
+<script>
+  ST.main.renderAuthUI(document.getElementById('authContainer'));
+  ST.main.initAuthState(()=>{});
+  ST.main.renderQuiz('liftQuiz',{shuffle:true, limit:4});
+</script>
+</body>
+</html>
+
+<section id="fortnite-quiz" style="max-width: 800px; margin: 40px auto; font-family: Arial, sans-serif;">
+  <h2 style="color: #2a7f6f;">Fortnite Anti-Bullying Quiz</h2>
+  <p>Test your knowledge about bullying using Fortnite-style situations. Choose the best answer for each question!</p>
+
+  <div id="quiz"></div>
+
+  <button onclick="checkQuiz()" 
+    style="margin-top: 20px; padding: 12px 18px; background-color: #2a7f6f; color: white; border: none; border-radius: 6px; cursor: pointer;">
+    Submit Answers
+  </button>
+
+  <h3 id="score" style="margin-top: 20px; color: #2a7f6f;"></h3>
+</section>
+
+<script>
+  const quizData = [
+    {
+      question: "1. A teammate keeps calling you 'trash' after every fight you lose. What type of bullying is this?",
+      options: ["Verbal bullying", "Cyberbullying", "Physical bullying", "Not bullying"],
+      answer: "Verbal bullying"
+    },
+    {
+      question: "2. Someone in squad chat threatens to kick you out unless you give them all your loot. What’s happening?",
+      options: ["A normal trade", "Friendly teasing", "Power imbalance and bullying", "A game glitch"],
+      answer: "Power imbalance and bullying"
+    },
+    {
+      question: "3. A player makes a group chat to laugh at how you play. What type of behavior is this?",
+      options: ["Team strategy", "Cyberbullying", "In-game warning", "Just joking"],
+      answer: "Cyberbullying"
+    },
+    {
+      question: "4. What’s the BEST thing to do if someone is harassing another player in voice chat?",
+      options: ["Join in so they don’t target you", "Mute and report the behavior", "Pretend you don’t hear it", "Quit the match immediately"],
+      answer: "Mute and report the behavior"
+    },
+    {
+      question: "5. A teammate keeps building walls around you on purpose to trap you. This is an example of:",
+      options: ["Gameplay strategy", "Harmless fun", "Targeted in-game bullying", "A speed-run trick"],
+      answer: "Targeted in-game bullying"
+    },
+    {
+      question: "6. Someone keeps sending rude messages after every match. What should you do first?",
+      options: ["Send insults back", "Block the player", "Screenshot and post online", "Tell them to stop in all caps"],
+      answer: "Block the player"
+    },
+    {
+      question: "7. A player says they won’t revive you because they dislike your skin. This is:",
+      options: ["Good teamwork", "A strategic decision", "Excluding someone unfairly", "Normal matchmaking"],
+      answer: "Excluding someone unfairly"
+    },
+    {
+      question: "8. What quality helps prevent bullying in Fortnite squads?",
+      options: ["Teamwork and respect", "Only talking to pros", "Ignoring everyone", "Bragging about wins"],
+      answer: "Teamwork and respect"
+    },
+    {
+      question: "9. A friend keeps making fun of your skill level every time you play. Even after you ask them to stop, they continue. What is this?",
+      options: ["Friendly roasting", "Teasing that became bullying", "Normal gaming talk", "Helping you improve"],
+      answer: "Teasing that became bullying"
+    },
+    {
+      question: "10. What should you do if YOU accidentally hurt someone’s feelings during a match?",
+      options: ["Laugh it off", "Blame the lag", "Say sorry and be respectful", "Act like nothing happened"],
+      answer: "Say sorry and be respectful"
+    }
+  ];
+
+  const quizContainer = document.getElementById("quiz");
+
+  quizData.forEach((q, index) => {
+    const div = document.createElement("div");
+    div.style.marginBottom = "20px";
+    div.innerHTML = `
+      <p><strong>${q.question}</strong></p>
+      ${q.options.map(option => `
+        <label style="display:block; margin-left: 10px;">
+          <input type="radio" name="q${index}" value="${option}"> ${option}
+        </label>
+      `).join("")}
+    `;
+    quizContainer.appendChild(div);
+  });
+
+  function checkQuiz() {
+    let score = 0;
+
+    quizData.forEach((q, index) => {
+      const answer = document.querySelector(`input[name="q${index}"]:checked`);
+      if (answer && answer.value === q.answer) {
+        score++;
+      }
+    });
+
+    document.getElementById("score").innerText = 
+      `You scored ${score} out of ${quizData.length}!`;
+  }
+</script>
+
+<section id="fortnite-quiz" style="max-width: 800px; margin: 40px auto; font-family: Arial, sans-serif;">
+  <h2 style="color:#2a7f6f; margin-bottom: 20px;">Fortnite Bullying Awareness Quiz</h2>
+  <p>Answer the questions below and click "Submit" to see how you did!</p>
+
+  <form id="quizForm">
+    <!-- Question Template -->
+    <div class="question">
+      <p><strong>1. A teammate keeps making fun of your skill level in Fortnite.</strong></p>
+      <label><input type="radio" name="q1" value="b"> Politely ask them to stop and mute them if needed.</label><br>
+      <label><input type="radio" name="q1" value="a"> Insult them back.</label><br>
+      <label><input type="radio" name="q1" value="c"> Quit the match and never play again.</label>
+    </div>
+
+    <div class="question">
+      <p><strong>2. Bullying in Fortnite can include...</strong></p>
+      <label><input type="radio" name="q2" value="b"> Repeatedly mocking someone or excluding them on purpose.</label><br>
+      <label><input type="radio" name="q2" value="a"> Losing a match.</label><br>
+      <label><input type="radio" name="q2" value="c"> Missing a shot.</label>
+    </div>
+
+    <div class="question">
+      <p><strong>3. If a player keeps targeting you and trash-talking every match, what should you do?</strong></p>
+      <label><input type="radio" name="q3" value="b"> Block/report them through Fortnite’s tools.</label><br>
+      <label><input type="radio" name="q3" value="a"> Yell at them louder.</label><br>
+      <label><input type="radio" name="q3" value="c"> Team up with them next game.</label>
+    </div>
+
+    <div class="question">
+      <p><strong>4. Encouraging a teammate who made a mistake is an example of...</strong></p>
+      <label><input type="radio" name="q4" value="b"> Positive communication.</label><br>
+      <label><input type="radio" name="q4" value="a"> Bullying.</label><br>
+      <label><input type="radio" name="q4" value="c"> Rage quitting.</label>
+    </div>
+
+    <div class="question">
+      <p><strong>5. Cyberbullying in Fortnite can happen when someone...</strong></p>
+      <label><input type="radio" name="q5" value="b"> Sends hurtful messages over and over.</label><br>
+      <label><input type="radio" name="q5" value="a"> Edits faster than you.</label><br>
+      <label><input type="radio" name="q5" value="c"> Wins a 1v1.</label>
+    </div>
+
+    <div class="question">
+      <p><strong>6. A teammate keeps laughing at your gameplay mistakes. What is a healthy response?</strong></p>
+      <label><input type="radio" name="q6" value="b"> Let them know their behavior isn’t okay and mute/report if needed.</label><br>
+      <label><input type="radio" name="q6" value="a"> Try to bully someone else instead.</label><br>
+      <label><input type="radio" name="q6" value="c"> Quit playing Fortnite forever.</label>
+    </div>
+
+    <div class="question">
+      <p><strong>7. If someone is being bullied in your squad, what’s the best thing to do?</strong></p>
+      <label><input type="radio" name="q7" value="b"> Support them and tell the bully to stop.</label><br>
+      <label><input type="radio" name="q7" value="a"> Join in so the bully likes you.</label><br>
+      <label><input type="radio" name="q7" value="c"> Ignore it and hope it stops.</label>
+    </div>
+
+    <div class="question">
+      <p><strong>8. Fortnite’s reporting system helps players...</strong></p>
+      <label><input type="radio" name="q8" value="b"> Stay safer and handle negative behavior.</label><br>
+      <label><input type="radio" name="q8" value="a"> Get free skins.</label><br>
+      <label><input type="radio" name="q8" value="c"> Troll each other.</label>
+    </div>
+
+    <div class="question">
+      <p><strong>9. A positive Fortnite player...</strong></p>
+      <label><input type="radio" name="q9" value="b"> Encourages and supports teammates.</label><br>
+      <label><input type="radio" name="q9" value="a"> Makes fun of new players.</label><br>
+      <label><input type="radio" name="q9" value="c"> Only cares about winning.</label>
+    </div>
+
+    <div class="question">
+      <p><strong>10. Why is preventing bullying important, even in games?</strong></p>
+      <label><input type="radio" name="q10" value="b"> Everyone deserves a fun, safe environment to play in.</label><br>
+      <label><input type="radio" name="q10" value="a"> Bullying makes you better at Fortnite.</label><br>
+      <label><input type="radio" name="q10" value="c"> Only pros deserve respect.</label>
+    </div>
+
+    <button type="button" onclick="checkQuiz()" style="margin-top: 20px; padding: 10px 20px; background:#2a7f6f; color:white; border:none; border-radius:5px; cursor:pointer;">
+      Submit
+    </button>
+  </form>
+
+  <div id="result" style="margin-top: 30px; font-weight: bold; font-size: 18px;"></div>
+</section>
+
+<script>
+  function checkQuiz() {
+    const answers = {
+      q1: "b",
+      q2: "b",
+      q3: "b",
+      q4: "b",
+      q5: "b",
+      q6: "b",
+      q7: "b",
+      q8: "b",
+      q9: "b",
+      q10: "b"
+    };
+
+    let score = 0;
+    const form = document.getElementById("quizForm");
+
+    for (let key in answers) {
+      const selected = form.querySelector(`input[name="${key}"]:checked`);
+      if (selected && selected.value === answers[key]) {
+        score++;
+      }
+    }
+
+    document.getElementById("result").innerHTML =
+      `You scored ${score}/10!<br>${score === 10 ? "Perfect! Great job!" : "Keep learning and improving!"}`;
+  }
+</script>
+

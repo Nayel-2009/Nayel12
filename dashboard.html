@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Dashboard — StandUpTogether</title>
+<link rel="stylesheet" href="style.css"></head>
+<body>
+<nav>
+  <div class="brand">StandUpTogether</div>
+  <div class="links">
+    <a href="index.html">Home</a><a href="about.html">About</a><a href="timeline.html">Timeline</a><a href="lift.html">Lift Others Up</a><a href="stories.html">Stories</a><a href="positivity.html">Positivity Wall</a><a href="contact.html">Contact</a><a href="login.html">Login</a><a href="dashboard.html">Dashboard</a>
+  </div>
+  <div id="authContainer"></div>
+</nav>
+
+<div class="container">
+  <div class="card">
+    <h2>Your Dashboard</h2>
+    <p>Welcome! Here you will find your quiz history, your submitted stories, and your saved quotes.</p>
+    <div style="margin-top:12px">
+      <button class="btn-game" onclick="ST.main.seedSampleData()">Seed Sample Data (admin only)</button>
+    </div>
+  </div>
+</div>
+
+<script type="module" src="main.js"></script>
+<script>
+  ST.main.renderAuthUI(document.getElementById('authContainer'));
+  ST.main.initAuthState(()=>{});
+</script>
+</body>
+</html>

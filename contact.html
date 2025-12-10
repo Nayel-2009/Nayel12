@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Contact — StandUpTogether</title>
+<link rel="stylesheet" href="style.css"></head>
+<body>
+<nav>
+  <div class="brand">StandUpTogether</div>
+  <div class="links">
+    <a href="index.html">Home</a><a href="about.html">About</a><a href="timeline.html">Timeline</a><a href="lift.html">Lift Others Up</a><a href="stories.html">Stories</a><a href="positivity.html">Positivity Wall</a><a href="contact.html">Contact</a><a href="login.html">Login</a><a href="dashboard.html">Dashboard</a>
+  </div>
+  <div id="authContainer"></div>
+</nav>
+
+<div class="container">
+  <div class="card">
+    <h2>Contact</h2>
+    <p>If you need help or want to reach out personally, contact me directly.</p>
+    <p><b>Name:</b> Nael Kasanda</p>
+    <p><b>Phone:</b> +243 827 210 261</p>
+    <p><b>Email:</b> naelkasanda0@gmail.com</p>
+  </div>
+
+  <div class="card">
+    <h3>Send me a message</h3>
+    <form id="contactForm">
+      <label>Your name</label><input id="cname" type="text" required>
+      <label>Your email</label><input id="cemail" type="email" required>
+      <label>Message</label><textarea id="cmessage" required></textarea>
+      <button class="btn-game" type="submit">Send Message</button>
+    </form>
+    <p style="margin-top:10px;color:#234;">Messages are saved to Firestore and an email can be sent to the project owner if you enable Cloud Functions (instructions below).</p>
+  </div>
+</div>
+
+<script type="module" src="main.js"></script>
+<script>
+  ST.main.renderAuthUI(document.getElementById('authContainer'));
+  ST.main.initAuthState(()=>{});
+  document.getElementById('contactForm').onsubmit = async (e)=>{
+    e.preventDefault();
+    const name = document.getElementById('cname').value;
+    const email = document.getElementById('cemail').value;
+    const message = document.getElementById('cmessage').value;
+    await ST.main.postContactMessage(name,email,message);
+    playSound('success');
+    alert('Message sent — thank you!'); // user feedback
+    e.target.reset();
+  };
+</script>
+</body>
+</html>

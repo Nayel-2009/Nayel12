@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Login — StandUpTogether</title>
+<link rel="stylesheet" href="style.css"></head>
+<body>
+<nav>
+  <div class="brand">StandUpTogether</div>
+  <div class="links">
+    <a href="index.html">Home</a><a href="about.html">About</a><a href="timeline.html">Timeline</a><a href="lift.html">Lift Others Up</a><a href="stories.html">Stories</a><a href="positivity.html">Positivity Wall</a><a href="contact.html">Contact</a><a href="login.html">Login</a><a href="dashboard.html">Dashboard</a>
+  </div>
+  <div id="authContainer"></div>
+</nav>
+
+<div class="container">
+  <div class="card">
+    <h2>Login / Register</h2>
+    <p>Sign in with Google or email.</p>
+    <div style="max-width: 300px; padding: 15px; border: 1px solid #ccc; border-radius: 8px;">
+    <h3>Enter Your Information</h3>
+
+    <form action="https://formspree.io/f/xgvgnrnj" method="POST">
+        
+        <label for="name">Name:</label><br>
+        <input type="text" id="name" name="name" required><br><br>
+
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email" required><br><br>
+
+        <label for="age">Age:</label><br>
+        <input type="number" id="age" name="age" min="1" max="120" required><br><br>
+
+        <button type="submit">Send</button>
+    </form>
+</div>
+
+
+
+    <div id="authBox"></div>
+  </div>
+</div>
+
+<script type="module" src="main.js"></script>
+<script>
+  ST.main.renderAuthUI(document.getElementById('authBox'));
+  ST.main.initAuthState(user=>{
+    if(user) alert('Signed in as '+(user.displayName||user.email));
+  });
+</script>
+</body>
+</html>

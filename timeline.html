@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>StandUpTogether — Timeline</title>
+<link rel="stylesheet" href="style.css"></head>
+<body>
+<nav>
+  <div class="brand">StandUpTogether</div>
+  <div class="links">
+    <a href="index.html">Home</a><a href="about.html">About</a><a href="timeline.html">Timeline</a><a href="lift.html">Lift Others Up</a><a href="stories.html">Stories</a><a href="positivity.html">Positivity Wall</a><a href="contact.html">Contact</a><a href="login.html">Login</a><a href="dashboard.html">Dashboard</a>
+  </div>
+  <div id="authContainer"></div>
+</nav>
+
+<div class="container">
+  <div class="card">
+    <h2>Your Healing Timeline</h2>
+    <p>Use the timeline to guide your learning step-by-step. You can add events (signed-in users) and explore stages.</p>
+
+    <form id="timelineForm" style="margin-top:10px;">
+      <label>Year</label>
+      <input id="tyear" type="text" placeholder="e.g., 2024">
+      <label>Event text</label>
+      <input id="ttext" type="text" placeholder="Short event description">
+      <button class="btn-game" type="submit">Add Event</button>
+    </form>
+
+    <div id="timelineList" style="margin-top:12px;"></div>
+  </div>
+</div>
+
+<script type="module" src="main.js"></script>
+<script>
+  ST.main.renderAuthUI(document.getElementById('authContainer'));
+  ST.main.initAuthState(()=>{});
+  // subscribe timeline
+  ST.main.subscribeTimeline(events=>{
+    const out = events.map(e=>`<div class="card story"><strong>${e.year}</strong><p>${e.text}</p></div>`).join('');
+    document.getElementById('timelineList').innerHTML = out;
+  });
+  // add form
+  document.getElementById('timelineForm').onsubmit = async (ev)=>{
+    ev.preventDefault();
+    const y = document.getElementById('tyear').value;
+    const t = document.getElementById('ttext').value;
+    await ST.main.addTimelineEvent(y,t);
+    playSound('success');
+    ev.target.reset();
+  };
+</script>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>StandUpTogether — Home</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- NAV -->
+  <nav>
+    <div class="brand">StandUpTogether</div>
+    <div class="links">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="timeline.html">Timeline</a>
+      <a href="lift.html">Lift Others Up</a>
+      <a href="stories.html">Stories</a>
+      <a href="positivity.html">Positivity Wall</a>
+      <a href="contact.html">Contact</a>
+      <a href="login.html">Login</a>
+      <a href="dashboard.html">Dashboard</a>
+    </div>
+    <div id="authContainer"></div>
+  </nav>
+
+  <section class="hero">
+    <h1>Stand Up. Speak Up. You’re not alone.</h1>
+    <p>Begin your recovery journey with short lessons, quizzes, and real stories to inspire you.</p>
+    <button class="btn-game" onclick="location.href='dashboard.html'">Start Your Journey</button>
+  </section>
+
+  <div class="container">
+    <div class="card">
+      <h2 class="pixel-title">What you will do</h2>
+      <p>Follow a guided timeline, read real-life stories, take mini quizzes with Fortnite-style contexts, and write quotes that help your peers.</p>
+      <div style="margin-top:12px">
+        <span class="badge">Interactive</span> <span class="badge">Youth Friendly</span>
+      </div>
+    </div>
+
+    <div class="card glow-outline">
+      <h3 class="pixel-title">Quick Quiz Preview</h3>
+      <div id="homeQuiz"></div>
+    </div>
+
+    <div class="card">
+      <h3 class="pixel-title">Featured Story</h3>
+      <div class="story">
+        <h3>Fortnite Lobby Rescue</h3>
+        <p>I was being mocked in voice chat until a random teammate defended me. We started playing together and I felt included again.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <footer><small>© StandUpTogether • Designed by Nael Kasanda</small></footer>
+
+  <script type="module" src="main.js"></script>
+  <script>
+    // init auth UI
+    ST.main.renderAuthUI(document.getElementById('authContainer'));
+    ST.main.initAuthState(user=>{
+      // you can update the UI here if needed
+    });
+    // render a tiny quiz preview: uses the renderQuiz function that reads collection 'quizQuestions'
+    ST.main.renderQuiz('homeQuiz',{shuffle:true, limit:2});
+  </script>
+</body>
+</html>

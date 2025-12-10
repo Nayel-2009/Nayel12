@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>StandUpTogether — Positivity Wall</title>
+<link rel="stylesheet" href="style.css"></head>
+<body>
+<nav>
+  <div class="brand">StandUpTogether</div>
+  <div class="links">
+    <a href="index.html">Home</a><a href="about.html">About</a><a href="timeline.html">Timeline</a><a href="lift.html">Lift Others Up</a><a href="stories.html">Stories</a><a href="positivity.html">Positivity Wall</a><a href="contact.html">Contact</a><a href="login.html">Login</a><a href="dashboard.html">Dashboard</a>
+  </div>
+  <div id="authContainer"></div>
+</nav>
+
+<div class="container">
+  <div class="card">
+    <h2>Positivity Wall</h2>
+    <form id="wallForm">
+      <label>Your name (or anonymous)</label><input id="wname" type="text" placeholder="Your name">
+      <label>Your quote</label><input id="wquote" type="text" placeholder="Write a short positive quote">
+      <button class="btn-game" type="submit">Post Quote</button>
+    </form>
+  </div>
+
+  <div id="wallList" class="container"></div>
+</div>
+
+<script type="module" src="main.js"></script>
+<script>
+  ST.main.renderAuthUI(document.getElementById('authContainer'));
+  ST.main.initAuthState(()=>{});
+  ST.main.subscribeWall(posts=>{
+    document.getElementById('wallList').innerHTML = posts.map(p=>`<div class="card story"><p>${p.message}</p><small>— ${p.name||'Anonymous'}</small></div>`).join('');
+  });
+
+  document.getElementById('wallForm').onsubmit = async (e)=>{
+    e.preventDefault();
+    const name = document.getElementById('wname').value || 'Anonymous';
+    const message = document.getElementById('wquote').value;
+    await ST.main.postWall(name,message);
+    playSound('success');
+    e.target.reset();
+  };
+</script>
+</body>
+</html>

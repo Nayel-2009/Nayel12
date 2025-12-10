@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>StandUpTogether — Stories</title>
+<link rel="stylesheet" href="style.css"></head>
+<body>
+<nav>
+  <div class="brand">StandUpTogether</div>
+  <div class="links">
+    <a href="index.html">Home</a><a href="about.html">About</a><a href="timeline.html">Timeline</a><a href="lift.html">Lift Others Up</a><a href="stories.html">Stories</a><a href="positivity.html">Positivity Wall</a><a href="contact.html">Contact</a><a href="login.html">Login</a><a href="dashboard.html">Dashboard</a>
+  </div>
+  <div id="authContainer"></div>
+</nav>
+
+<div class="container">
+  <div class="card">
+    <h2>Real Stories</h2>
+    <form id="storyForm">
+      <label>Title</label><input id="stitle" type="text" placeholder="Short title" required>
+      <label>Story</label><textarea id="sbody" placeholder="Share your story..." required></textarea>
+      <button class="btn-game" type="submit">Share Story</button>
+    </form>
+  </div>
+
+  <div id="storiesList" class="container"></div>
+</div>
+
+<script type="module" src="main.js"></script>
+<script>
+  ST.main.renderAuthUI(document.getElementById('authContainer'));
+  ST.main.initAuthState(()=>{});
+  ST.main.subscribeStories(stories=>{
+    document.getElementById('storiesList').innerHTML = stories.map(s=>`<div class="card story"><h3>${s.title}</h3><p>${s.body}</p><small>by ${s.authorName||'Anonymous'}</small></div>`).join('');
+  });
+
+  document.getElementById('storyForm').onsubmit = async (e)=>{
+    e.preventDefault();
+    const t = document.getElementById('stitle').value;
+    const b = document.getElementById('sbody').value;
+    const user = fb.auth.currentUser || {};
+    await ST.main.addStory(t,b, user.displayName || user.email || 'Anonymous');
+    playSound('success');
+    e.target.reset();
+  };
+</script>
+</body>
+</html>
